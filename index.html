@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Ich liebe Jenny ❤️</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Jenny ❤️">
@@ -15,7 +15,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body { height: 100%; }
+    html, body { height: 100%; touch-action: manipulation; }
 
     body {
       min-height: 100vh;
@@ -120,6 +120,14 @@
   <p class="hint">Tipp aufs Herz ❤️</p>
 
   <script>
+    // Zoomen per Zwei-Finger-Geste verhindern (iOS Safari)
+    ['gesturestart', 'gesturechange', 'gestureend'].forEach(evt =>
+      document.addEventListener(evt, e => e.preventDefault(), { passive: false })
+    );
+
+    // Doppeltipp-Zoom wird per CSS (touch-action: manipulation) verhindert,
+    // so bleibt schnelles Mehrfach-Tippen aufs Herz möglich.
+
     const heart = document.getElementById('heart');
     heart.addEventListener('click', () => {
       const rect = heart.getBoundingClientRect();
